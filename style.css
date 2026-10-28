@@ -1,0 +1,329 @@
+:root {
+  --bg: #0f1020;
+  --bg-soft: #1a1b3a;
+  --text: #f5f5ff;
+  --muted: #a9aac9;
+  --accent: #ffd166;
+  --accent-2: #06d6a0;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------- Animated Diwali background ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    /* the real Diwali photo */
+    url('bg.jpg') center/cover no-repeat,
+    /* dark overlay so white text stays readable */
+    linear-gradient(180deg, rgba(15, 10, 30, 0.55), rgba(15, 10, 30, 0.85));
+  /* warm amber glow over the photo */
+  box-shadow: inset 0 0 200px rgba(255, 180, 60, 0.18);
+}
+
+.diya {
+  position: absolute;
+  font-size: clamp(3rem, 8vw, 6rem);
+  filter: drop-shadow(0 0 20px rgba(255, 180, 60, 0.7));
+  animation: float 8s ease-in-out infinite;
+}
+.diya-1 { top: 12%; left: 8%; animation-delay: 0s; }
+.diya-2 { top: 60%; right: 10%; animation-delay: 2.5s; font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.diya-3 { bottom: 10%; left: 18%; animation-delay: 5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+}
+
+.diya::after {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(255, 230, 120, 0.95), rgba(255, 140, 30, 0.5) 60%, transparent 70%);
+  border-radius: 50%;
+  animation: flicker 2.4s ease-in-out infinite;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; height: 28px; }
+  50% { opacity: 1; height: 34px; }
+}
+
+.petal {
+  position: absolute;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  animation: drift linear infinite;
+  opacity: 0.85;
+}
+.p-1 { top: -10%; left: 12%; animation-duration: 14s; }
+.p-2 { top: -15%; left: 48%; animation-duration: 18s; animation-delay: -3s; }
+.p-3 { top: -8%; left: 78%; animation-duration: 16s; animation-delay: -7s; }
+.p-4 { top: -12%; left: 62%; animation-duration: 20s; animation-delay: -11s; }
+.p-5 { top: -6%; left: 30%; animation-duration: 15s; animation-delay: -5s; }
+
+@keyframes drift {
+  0% { transform: translate(-20px, -10vh) rotate(0deg); }
+  100% { transform: translate(20px, 110vh) rotate(360deg); }
+}
+
+.spark {
+  position: absolute;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  animation: twinkle 2s ease-in-out infinite;
+}
+.s-1 { top: 30%; left: 25%; animation-delay: 0s; }
+.s-2 { top: 55%; left: 70%; animation-delay: 0.6s; }
+.s-3 { top: 80%; left: 40%; animation-delay: 1.2s; }
+.s-4 { top: 20%; left: 60%; animation-delay: 1.8s; }
+.s-5 { top: 70%; left: 15%; animation-delay: 0.3s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: transparent;
+}
+
+.eyebrow {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  color: var(--muted);
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.hero-cta {
+  margin-top: 2.5rem;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.hero-cta:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Greeting sections ---------- */
+#greetings {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+.greeting {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.greeting-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  max-width: 460px;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.greeting-card.is-visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.greeting-card.namaste-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+.greeting-card.namaste-link:hover {
+  box-shadow: 0 0 0 2px rgba(255, 209, 102, 0.6), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.greeting-card.is-hidden {
+  transform: scale(0.85);
+  opacity: 0;
+}
+
+.greeting-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.greeting-card h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.greeting-card p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* ---------- Namaste page ---------- */
+.namaste-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+.namaste-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 4rem 3rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: namasteIn 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes namasteIn {
+  from { opacity: 0; transform: scale(0.8) translateY(40px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.namaste-emoji {
+  font-size: clamp(4rem, 14vw, 7rem);
+  display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 24px rgba(255, 180, 60, 0.7));
+  animation: float 6s ease-in-out infinite;
+}
+
+.namaste-title {
+  font-size: clamp(2.5rem, 9vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.namaste-name {
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.namaste-wish {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Farewell ---------- */
+.farewell {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.farewell-text {
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.farewell-cta {
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.farewell-cta:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .greeting-card { padding: 2.5rem 1.5rem; }
+  .greeting-card h2 { font-size: 2rem; }
+}
